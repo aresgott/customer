@@ -15,11 +15,9 @@ async function bootstrap() {
   const prismaService = app.get(PrismaService);
   await prismaService.enableShutdownHooks(app);
   const config = new DocumentBuilder()
-    .setTitle('Service Example')
+    .setTitle('Node.js recruitment task - senior')
     .setDescription('Service that can be used for boiler plating')
     .setVersion('1.0')
-    .addTag('example')
-    .addTag('default')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);

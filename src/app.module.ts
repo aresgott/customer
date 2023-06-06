@@ -7,6 +7,9 @@ import { AppService } from './app.service';
 import { join } from 'path';
 import { PrismaService } from './prisma.service';
 import { CustomerModule } from './customer/customer.module';
+import { AuthModule } from './auth/auth.module';
+import { CustomerController } from './customer/customer.controller';
+import { CustomerService } from './customer/customer.service';
 
 @Module({
   imports: [
@@ -21,8 +24,9 @@ import { CustomerModule } from './customer/customer.module';
       playground: true,
       introspection: true, // TODO update this so that it's off in production;
     }),
+    AuthModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, PrismaService],
+  controllers: [CustomerController],
+  providers: [AppService, PrismaService,CustomerService],
 })
-export class AppModule {}
+export class AppModule { }

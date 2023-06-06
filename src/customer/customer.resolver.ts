@@ -2,6 +2,8 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 import { Customer } from 'lib/entities/customer.entity';
 import { CustomerService } from './customer.service';
 import { GetCustomerInput } from './dto/customer.input';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Resolver(() => Customer)
 export class CustomerResolver {

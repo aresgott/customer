@@ -11,6 +11,7 @@ type Customer {
   """Date and time when the object was updated last time."""
   updatedAt: Timestamp!
   email: String!
+  role: String!
 }
 
 """
