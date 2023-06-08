@@ -4,8 +4,8 @@ import { AppModule } from './app.module';
 import { PrismaService } from './prisma.service';
 
 async function bootstrap() {
-  process.env.DATABASE_URL = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}?schema=${process.env.DB_SCHEMA}&sslmode=prefer`;
-  process.env.SHADOW_DATABASE_URL = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}?schema=dbmigration&sslmode=prefer`;
+  // process.env.DATABASE_URL = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}?schema=${process.env.DB_SCHEMA}&sslmode=prefer`;
+  // process.env.SHADOW_DATABASE_URL = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}?schema=dbmigration&sslmode=prefer`;
 
   const app = await NestFactory.create(AppModule, {
     bufferLogs: true,
@@ -16,7 +16,7 @@ async function bootstrap() {
   await prismaService.enableShutdownHooks(app);
   const config = new DocumentBuilder()
     .setTitle('Node.js recruitment task - senior')
-    .setDescription('Service that can be used for boiler plating')
+    .setDescription('Mohsen Ahmadinia - <a href="mailto:ce.ahmadinia@gmail.com">Email me</a>')
     .setVersion('1.0')
     .addBearerAuth()
     .build();

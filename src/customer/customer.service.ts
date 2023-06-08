@@ -65,7 +65,6 @@ export class CustomerService {
   async updateCustomer(email: string, createCustomerDto: UpdateCustomerDto): Promise<CustomerDto> {
 
     const saltOrRounds = 10;
-    console.log()
     let hashedPassword = undefined;
     if(createCustomerDto.password) hashedPassword = await bcrypt.hash(createCustomerDto.password, saltOrRounds);
     const customer = await this.prisma.customer.update({
@@ -108,16 +107,16 @@ export class CustomerService {
     }
   }
 
-  async deleteCustomer(email: string): Promise<void> {
+  async deleteCustomer(email: string): Promise<CustomerDto> {
     try {
       const customer = await this.prisma.customer.delete({ where: { email } });
-
       if (!customer) {
         throw new NotFoundException(`Customer with email ${email} not found`);
       }
+      return customer;
     } catch (error) {
       if (error.code === 'P2025') {
-        throw new ConflictException('Customer not exist');
+        throw new NotFoundException('Customer not exist');
       }
       throw error;
     }

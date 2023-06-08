@@ -7,8 +7,6 @@ import { CustomerModule } from './customer/customer.module';
 import { AuthModule } from './auth/auth.module';
 import { CustomerController } from './customer/customer.controller';
 import { CustomerService } from './customer/customer.service';
-import { APP_GUARD } from '@nestjs/core';
-import { CustomerCController } from './customer-c/customer-c.controller';
 
 @Module({
   imports: [
@@ -25,7 +23,7 @@ import { CustomerCController } from './customer-c/customer-c.controller';
     }),
     AuthModule,
   ],
-  controllers: [CustomerController, CustomerCController],
+  controllers: [CustomerController],
   providers: [PrismaService, CustomerService],
 })
 export class AppModule { }
