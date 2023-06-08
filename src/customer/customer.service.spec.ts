@@ -72,7 +72,7 @@ describe('CustomerService', () => {
             })
         })
         describe('when email does not exist', () => {
-            it('should return customer', async () => {
+            it('should not return customer', async () => {
                 try {
                     const email = 'random@gmail.com';
                     const customer = await service.getCustomerByEmail(email)

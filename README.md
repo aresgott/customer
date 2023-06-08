@@ -1,30 +1,30 @@
-# Node.js recruitment task - senior
+# 🟨 Node.js recruitment task  - senior
 
-This repository contains the base code for recruitment exercise. Complete the tasks listed below and publish the solution on your github. Send us a link to your repository at least 1 day before the interview. 
-We will discuss the proposed solution during the interview. You should be ready to present the working application on your local machine.
 
-There is some key features that must be implemented in the recruitment task:
+[x] CRUD operations for customers (Create, Read, Update, Delete) by email;
 
-- CRUD operations for customers (get, update, delete) by id or email;
+[x] Login and signup operations for customers;
+- I add route for get user info
 
-- login and signup operations for customers;
+[x] Roles USER and ADMIN;
 
-- roles USER and ADMIN;
+[x] Access token;
 
-- access token;
+[x] Refresh token;
 
-- refresh token;
+[x] Restrict access to get customers operation from unauthenticated users;
+- For fun i add extra route for public access
 
-- restrict access to get customers operation from unauthenticated users;
+[x] Restrict access to delete customer and update customer operations from unauthenticated users and customers with USER role;
 
-- restrict access to delete customer and update customer operations from unauthenticated users and customers with USER role;
+[x] Ability to verify customer's account after signup with activation code;
+- Activation code print in console (another idea was about using Mailgun)
 
-- ability to verify customer's account after signup with activation code;
+[x] I Added some unit tests and integration tests, but because of time issues and my vacation I couldn't do full coverage, it is just an example :(
 
 ## Installation
 
 ```bash
-# Install packages
 npm install
 
 npx prisma generate
@@ -49,9 +49,23 @@ npx prisma db seed
 
 ```bash
 # development
-$ npm run start
+npm run start
 
 # watch mode
-$ npm run start:dev
+npm run start:dev
+
+```
+
+## Address for Swagger
+```bash
+http://localhost:8080/api/
+
+```
+
+## For test
+```bash
+npm run test:watch --customer
+npm run test:e2e -- customer 
+npm run test:coverage 
 
 ```

@@ -15,7 +15,7 @@ model Customer {
   id        String   @id @unique @default(uuid())
   email     String   @unique
   password  String
-  role      String   @default("CUSTOMER")
+  role      String   @default("USER")
   active    String  @default("FALSE") //
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
