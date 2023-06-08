@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Customer" ALTER COLUMN "active" SET DEFAULT 'FALSE',
+ALTER COLUMN "active" SET DATA TYPE TEXT;

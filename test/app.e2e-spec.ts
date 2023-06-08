@@ -5,7 +5,7 @@ import { AppModule } from './../src/app.module';
 
 jest.mock('src/post/post.module');
 
-describe('AppController (e2e)', () => {
+describe('Customer Controller (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -19,9 +19,12 @@ describe('AppController (e2e)', () => {
 
   it('/ (GET)', () => {
     return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+      .get('/customer')
+      .expect(401)
+      .expect({
+        "statusCode": 401,
+        "message": "Unauthorized"
+      });
   });
 
   afterAll(async () => {

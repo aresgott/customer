@@ -1,15 +1,14 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { join } from 'path';
 import { PrismaService } from './prisma.service';
 import { CustomerModule } from './customer/customer.module';
 import { AuthModule } from './auth/auth.module';
 import { CustomerController } from './customer/customer.controller';
 import { CustomerService } from './customer/customer.service';
+import { APP_GUARD } from '@nestjs/core';
+import { CustomerCController } from './customer-c/customer-c.controller';
 
 @Module({
   imports: [
@@ -26,7 +25,7 @@ import { CustomerService } from './customer/customer.service';
     }),
     AuthModule,
   ],
-  controllers: [CustomerController],
-  providers: [AppService, PrismaService,CustomerService],
+  controllers: [CustomerController, CustomerCController],
+  providers: [PrismaService, CustomerService],
 })
 export class AppModule { }

@@ -1,37 +1,45 @@
 import {
     CanActivate,
     ExecutionContext,
+    ForbiddenException,
     Injectable,
     UnauthorizedException,
 } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
-
 import { Request } from 'express';
-import { jwtConstants } from './constant';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    constructor(private jwtService: JwtService) { }
+    constructor(
+        private jwtService: JwtService,
+        private readonly reflector: Reflector
+    ) { }
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
         const request = context.switchToHttp().getRequest();
-        console.log(request)
         const token = this.extractTokenFromHeader(request);
-        console.log(token)
         if (!token) {
             throw new UnauthorizedException();
         }
         try {
-            const payload = await this.jwtService.verifyAsync(
-                token,
-                {
-                    secret: jwtConstants.secret
-                }
+            const { iat, exp, ...payload } = await this.jwtService.verifyAsync(token, {
+                secret: process.env.ACCESS_TOKEN_SECRET,
+            });
+
+            const currentTime = Math.floor(Date.now() / 1000);
+            if (exp && exp < currentTime) {
+                throw new UnauthorizedException('Token has expired');
+            }
+            const requiredRoles = this.reflector.get<string[]>(
+                'roles',
+                context.getHandler(),
             );
-            // 💡 We're assigning the payload to the request object here
-            // so that we can access it in our route handlers
+            if (requiredRoles && !requiredRoles.includes(payload.role)) {
+                throw new ForbiddenException('Insufficient permissions');
+            }
             request['user'] = payload;
-        } catch {
+        } catch (error) {
             throw new UnauthorizedException();
         }
         return true;

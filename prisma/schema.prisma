@@ -15,8 +15,8 @@ model Customer {
   id        String   @id @unique @default(uuid())
   email     String   @unique
   password  String
-  refreshToken  String? //refresh token can goes to redux
-  role      String   @default("USER")
+  role      String   @default("CUSTOMER")
+  active    String  @default("FALSE") //
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
