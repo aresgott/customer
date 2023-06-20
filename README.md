@@ -1,4 +1,4 @@
-# 🟨 Node.js recruitment task  - senior
+# 🟨 Node.js task
 
 
 [x] CRUD operations for customers (Create, Read, Update, Delete) by email;
